@@ -12,13 +12,14 @@ router.post('/signin',(req,res,next)=>{
         successRedirect: '/',
         failureRedirect: '/users/login',
         failureFlash: true,
-        successMessage: 'wellcome'
+        successFlash: 'Welcome!'
     })(req,res,next)
 })
 
 router.get('/logout',(req,res,next)=>{
     req.logout();
-    res.redirect('/')
+    req.flash('success','you successfully logout')
+    res.redirect('/users/login')
 })
 
 module.exports = router;

@@ -1,6 +1,9 @@
     <div class="container login-container">
         <div class="row">
             <div class="col-md-6 login-form-1 mx-auto">
+
+                {{>msg}}
+
                 <h3>Login Form</h3>
                 <form action="/users/signin" method="post">
                     <div class="form-group">
@@ -16,7 +19,7 @@
                         <a href="forgetPassword.html">forget password?</a>
                     </div>
                     <div class="form-group">
-                        <a href="signup.html" class="ForgetPwd">have not account?</a>
+                        <a href="/users/register" class="ForgetPwd">have not account?</a>
                     </div>
                 </form>
                 <a href="/users/signin">login with other</a>

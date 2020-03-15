@@ -6,7 +6,6 @@ const User = require('../models/model.user')
 
 module.exports = function(){
     passport.use( new localStategy(function(username,password,done){
-        console.log(username + " and "+ password)
         User.findOne({email: username},(err,user)=>{
             if(err){
                 return done(null,err);

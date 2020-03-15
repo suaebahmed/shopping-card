@@ -1,6 +1,11 @@
 
-{{#if variable}}
+{{!-- login / --}}
+{{#if error}}
+    <h1>{{error}}</h1>
+    <p>this err msg</p>
+{{/if}}
 
-{{else}}
-
+{{!-- signup / --}}
+{{#if success}}
+    <div class="alert alert-success"><p>{{success}}</p></div>
 {{/if}}

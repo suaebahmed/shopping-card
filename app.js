@@ -27,10 +27,11 @@ db.on('error', err => {
   console.error('connection error:', err)
 });
 
-
-app.use('/bootstrap',express.static(path.join(__dirname,'/node_modules/bootstrap/dist/css')));
+app.use('/',express.static(path.join(__dirname+'/public')));
 app.use('/dist',express.static(path.join(__dirname,'/bower_components/jquery/dist')));
-app.use('/bootstrap',express.static(path.join(__dirname,'/bower_components/bootstrap/dist/js')));
+app.use('/bootstrap',express.static(path.join(__dirname,'/node_modules/bootstrap/dist/css')));
+//   find js/bootstrap.min.js
+app.use('/js',express.static(path.join(__dirname,'/node_modules/bootstrap/dist/js'))); 
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -49,14 +50,12 @@ app.use(function(req,res,next){
   res.locals.success=req.flash('success')
   res.locals.error = req.flash('error')
   res.locals.login = req.isAuthenticated()
-  res.locals.user = req.user
+  res.locals.user = req.user // set this after passport.session()
   res.locals.store = req.session
-  // res.locals.head = req.headers
-
-  console.log(res.locals.login)
-  console.log(res.locals.user)
-  console.log(res.locals.store)
-
+  res.locals.email = req.user ? req.user.email: null
+  //------- console.log(req.user ? req.user.email: 'null')-------
+  // console.log(res.locals.login)
+  // console.log(res.locals.user)
   next();
 });
 require('./config/password')();
@@ -71,9 +70,7 @@ app.use('/users',require('./routes/register'))
 
 app.use((req,res,next)=>{
   const error = new Error('Not found');
-  res.status(404).json({
-    Error: error.message
-  })
+  res.render('404',{error: error.message})
 })
 
 app.listen(3000,(req,res)=>{

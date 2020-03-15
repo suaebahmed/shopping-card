@@ -1,15 +1,29 @@
  <!DOCTYPE html>
  <head>
      <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="/css/style.css">
      <title>Hello, world!</title>
  </head>
  <body>
-      
-     {{{body}}}
+<div class="container">
+<nav>
+    <ul>
+        <li><a href="/">home</a></li>
+        {{#if login}}
+            <li>{{email}}</li>
+            <li><a href="/users/logout"><button>logout</button></a></li>
+        {{else}}
+            <li><a href="/users/login">signin</a></li>
+            <li><a href="/users/register">signup</a></li>
+        {{/if}}
+    </ul>
+</nav>
 
+    {{{body}}}
+
+</div>
      <script src="/dist/jquery.min.js"></script>
-     <script src="/bootstrap/bootstrap.min.js"></script>
+     <script src="/js/bootstrap.min.js"></script>
  </div>
  </body>
  </html>

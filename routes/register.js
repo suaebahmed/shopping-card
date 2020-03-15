@@ -9,6 +9,7 @@ router.get('/register',(req,res,next)=>{ // turn off register page
 router.post('/signup',(req,res)=>{
 
     const {email,password} = req.body;
+    console.log(req.body)
     var errArr=[]
     if(!password  || !email){
         errArr.push({msg: 'fill all the feild'})
@@ -40,6 +41,7 @@ router.post('/signup',(req,res)=>{
                     newUser.password = hash
                         newUser.save()
                         .then(()=>{
+                            req.flash('success','You successfully signup now you can signin')
                             res.redirect('/users/login')
                         })
                         .catch(err=>{
