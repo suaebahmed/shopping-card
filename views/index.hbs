@@ -1,9 +1,34 @@
 <div class="container">
-    <div class="row">
-        <div class="col-10 text-center">
-            {{>msg}}
-            <h1>hello world, I want to change the world</h1>
+<div class="text-center mb-5">
+                {{>msg}}
             <p><i>~"Education is the weopon which you can use to chang the world"</i></p>
-        </div>
+            <h1>Top 6 books for web developers</h1>
+
+</div>
+
+{{#each allProducts}}
+    <div class="row">
+        {{#each this}}
+            <div class="col-sm-6 col-md-4 text-center">
+                <div class="card">
+                        <img class="card-img-top" style="height: 250px;" src="{{this.imgPath}}" alt="Card image cap">
+                    <div class="card-body">
+                        <div class="card-title">
+                            {{this.title}}
+                        </div>
+                        <div class="card-text mb-4">
+                            {{this.description}}
+                        </div>
+                        <div class="muted text-right">${{this.price}}</div>
+                        <a href="#" class="btn btn-primary mr-5 card-link">Go</a>
+                        <a href="#" class="btn btn-primary card-link">Add to cart</a>
+                        {{!-- <img src="{{this.imgPath}}" id="rounded" class="img-thumbnail" alt="products img"> --}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
     </div>
+  {{/each}}
+
+
 </div>

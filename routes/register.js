@@ -9,17 +9,15 @@ router.get('/register',(req,res,next)=>{ // turn off register page
 router.post('/signup',(req,res)=>{
 
     const {email,password} = req.body;
-    console.log(req.body)
     var errArr=[]
     if(!password  || !email){
-        errArr.push({msg: 'fill all the feild'})
+        errArr.push({msg: 'fill up all the field'})
     }
     if(password.length < 5){
         errArr.push({msg: 'password should be at least 6 character'})
     }
     if(errArr.length > 0){
-        console.log(errArr)
-        res.render('signup',{error: errArr})
+        res.render('signup',{signupValidErr: errArr})
     }else{
         User.findOne({email: email},(err,user)=>{
             if(err){
@@ -30,7 +28,7 @@ router.post('/signup',(req,res)=>{
             }
             else if(user){
                 errArr.push({msg: 'user already exists'})
-                res.render('signup',{error: errArr})
+                res.render('signup',{signupValidErr: errArr})
             }else{
             bcrypt.genSalt(10,(err,selt)=>{
                 bcrypt.hash(password,selt,(err,hash)=>{

@@ -10,7 +10,7 @@
     <ul>
         <li><a href="/">home</a></li>
         {{#if login}}
-            <li>{{email}}</li>
+            <li>{{user.email}}</li>
             <li><a href="/users/logout"><button>logout</button></a></li>
         {{else}}
             <li><a href="/users/login">signin</a></li>
