@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const User = require('../models/model.user');
-const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
 
@@ -8,12 +6,19 @@ router.get('/login',(req,res)=>{ // turn off login page
     res.render('signin')
 })
 router.post('/signin',(req,res,next)=>{
-    passport.authenticate('local',{
-        successRedirect: '/',
-        failureRedirect: '/users/login',
-        failureFlash: true,
-        successFlash: 'Welcome!'
-    })(req,res,next)
+    const {email,password}= req.body;
+    if(email == '' || password == ''){
+        req.flash('error','make sure email and password not empty!')
+        res.render('signin');
+    }
+    else{
+        passport.authenticate('local',{
+            successRedirect: '/',
+            failureRedirect: '/users/login',
+            failureFlash: true,
+            successFlash: 'Welcome!'
+        })(req,res,next)
+    }
 })
 
 router.get('/logout',(req,res,next)=>{

@@ -9,6 +9,7 @@
 <nav>
     <ul>
         <li><a href="/">home</a></li>
+        <li><a href="/users/about">about</a></li>
         {{#if login}}
             <li>{{user.email}}</li>
             <li><a href="/users/logout"><button>logout</button></a></li>
@@ -16,6 +17,10 @@
             <li><a href="/users/login">signin</a></li>
             <li><a href="/users/register">signup</a></li>
         {{/if}}
+    </ul>
+    <ul class="right">
+        <li>total price: {{store.cart.totalPrice}}</li>
+        <li>total quantity: {{store.cart.totalQty}}</li>
     </ul>
 </nav>
 

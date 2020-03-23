@@ -16,12 +16,12 @@
                         <div class="card-title">
                             {{this.title}}
                         </div>
-                        <div class="card-text mb-4">
+                        <div class="card-text mb-2">
                             {{this.description}}
                         </div>
-                        <div class="muted text-right">${{this.price}}</div>
+                        <div class="my-3 text-muted text-left">Price: ${{this.price}}</div>
                         <a href="#" class="btn btn-primary mr-5 card-link">Go</a>
-                        <a href="#" class="btn btn-primary card-link">Add to cart</a>
+                        <a href="/addcart/{{this._id}}" class="btn btn-primary card-link">Add to cart</a>
                         {{!-- <img src="{{this.imgPath}}" id="rounded" class="img-thumbnail" alt="products img"> --}}
                     </div>
                 </div>

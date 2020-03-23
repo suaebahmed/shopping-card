@@ -39,7 +39,13 @@ app.use(bodyParser.json());
 app.use(session({
   secret: 'secret',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  // store: new MongoStore({
+  //   mongooseConnection: mongoose.connect
+  // }),
+  cookie: {
+    maxAge: 60 * 60 * 60 
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,12 +58,12 @@ app.use(function(req,res,next){
   res.locals.login = req.isAuthenticated()
   res.locals.user = req.user // set this after passport.session()
   res.locals.store = req.session
-  
   next();
 });
 require('./config/password')();
 
 app.use('/',require('./routes/products-route'));
+app.use('/users',require('./routes/profile-route'));
 app.use('/users',require('./routes/user'));
 app.use('/users',require('./routes/register'))
 
