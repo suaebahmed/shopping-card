@@ -11,8 +11,7 @@ router.get('/',(req,res)=>{
             for(let chunk=0; chunk<products.length; chunk+= 3){
                 newArr.push(products.slice(chunk,chunk+3));
             }
-
-            res.render('index',{allProducts: newArr})
+            res.render('shop/index',{allProducts: newArr})
         }
     })
 })
@@ -33,6 +32,16 @@ router.get('/addcart/:id',(req,res,next)=>{
             res.redirect('/')
         }
     })
+})
+
+router.get('/shopping/card',(req,res,next)=>{
+    var products = req.session.cart ? req.session.cart.items : null;
+    var totalPrice = req.session.cart ? req.session.cart.totalPrice : 0;
+    res.render('shop/shopping-card',{products,totalPrice})
+})
+
+router.get('/checkout',(req,res,next)=>{
+    res.render('shop/checkout')
 })
 
 module.exports = router;

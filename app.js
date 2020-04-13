@@ -6,6 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const mongoDBStore = require('connect-mongodb-session')(session)
 
 var handlebars = require('express-handlebars');
 app.set('view engine', 'hbs');
@@ -36,15 +37,19 @@ app.use('/js',express.static(path.join(__dirname,'/node_modules/bootstrap/dist/j
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
+const store = new mongoDBStore({
+  uri: url,
+  collection: 'cardSession'
+})
+
 app.use(session({
   secret: 'secret',
   resave: true,
   saveUninitialized: true,
-  // store: new MongoStore({
-  //   mongooseConnection: mongoose.connect
-  // }),
+  store: store,
   cookie: {
-    maxAge: 60 * 60 * 60 
+    maxAge: 1000 * 60 * 60
   }
 }));
 app.use(passport.initialize());

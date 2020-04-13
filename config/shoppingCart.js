@@ -10,7 +10,6 @@ module.exports = function Cart(initItems){
 
             q += initItems[obj].Qty
             p += initItems[obj].price
-            console.log(obj)
         }
         this.totalPrice = p;
         this.totalQty = q
